@@ -20,6 +20,7 @@ export const controls = {
 let icosphere: Icosphere;
 let square: Square;
 let cube: Cube;
+let time: number = 0;
 
 let prevTesselations: number = 5;
 
@@ -72,11 +73,14 @@ function main() {
     new Shader(gl.FRAGMENT_SHADER, require('./shaders/lambert-frag.glsl')),
   ]);
 
-  //set color from the gui value
-  lambert.setGeometryColor(vec4.fromValues(controls.color[0] / 255.0, controls.color[1] / 255.0, controls.color[2] / 255.0, 1));
+  const noise = new ShaderProgram([
+    new Shader(gl.VERTEX_SHADER, require('./shaders/noise-vert.glsl')),
+    new Shader(gl.FRAGMENT_SHADER, require('./shaders/noise-frag.glsl')),
+  ]);
 
   // This function will be called every frame
   function tick() {
+    time++;
     camera.update();
     stats.begin();
     gl.viewport(0, 0, window.innerWidth, window.innerHeight);
@@ -86,11 +90,18 @@ function main() {
       icosphere = new Icosphere(vec3.fromValues(0, 0, 0), 1, prevTesselations);
       icosphere.create();
     }
-    renderer.render(camera, lambert, [
-      // icosphere,
-      // square,
-      cube,
-    ]);
+
+    renderer.render(
+      camera,
+      lambert,
+      [
+        // icosphere,
+        // square,
+        cube,
+      ],
+      vec4.fromValues(controls.color[0] / 255.0, controls.color[1] / 255.0, controls.color[2] / 255.0, 1),
+      time
+    );
     stats.end();
 
     // Tell the browser to call `tick` again whenever it renders a new frame
