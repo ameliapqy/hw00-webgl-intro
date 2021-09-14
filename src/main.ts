@@ -11,7 +11,7 @@ import ShaderProgram, { Shader } from './rendering/gl/ShaderProgram';
 
 // Define an object with application parameters and button callbacks
 // This will be referred to by dat.GUI's functions that add GUI elements.
-const controls = {
+export const controls = {
   tesselations: 5,
   'Load Scene': loadScene, // A function pointer, essentially
   color: [252, 126, 126, 1],
@@ -20,6 +20,7 @@ const controls = {
 let icosphere: Icosphere;
 let square: Square;
 let cube: Cube;
+let time: number = 0;
 
 let prevTesselations: number = 5;
 
@@ -47,6 +48,8 @@ function main() {
   gui.add(controls, 'Load Scene');
   gui.addColor(controls, 'color');
 
+  gui.addColor(controls, 'color');
+
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement>document.getElementById('canvas');
   const gl = <WebGL2RenderingContext>canvas.getContext('webgl2');
@@ -71,8 +74,14 @@ function main() {
     new Shader(gl.FRAGMENT_SHADER, require('./shaders/lambert-frag.glsl')),
   ]);
 
+  const noise = new ShaderProgram([
+    new Shader(gl.VERTEX_SHADER, require('./shaders/noise-vert.glsl')),
+    new Shader(gl.FRAGMENT_SHADER, require('./shaders/noise-frag.glsl')),
+  ]);
+
   // This function will be called every frame
   function tick() {
+    time++;
     camera.update();
     stats.begin();
     gl.viewport(0, 0, window.innerWidth, window.innerHeight);
