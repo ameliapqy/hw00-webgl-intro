@@ -46,6 +46,7 @@ function main() {
   const gui = new DAT.GUI();
   gui.add(controls, 'tesselations', 0, 8).step(1);
   gui.add(controls, 'Load Scene');
+  gui.addColor(controls, 'color');
 
   gui.addColor(controls, 'color');
 
@@ -90,7 +91,6 @@ function main() {
       icosphere = new Icosphere(vec3.fromValues(0, 0, 0), 1, prevTesselations);
       icosphere.create();
     }
-
     renderer.render(
       camera,
       lambert,
@@ -99,8 +99,7 @@ function main() {
         // square,
         cube,
       ],
-      vec4.fromValues(controls.color[0] / 255.0, controls.color[1] / 255.0, controls.color[2] / 255.0, 1),
-      time
+      vec4.fromValues(controls.color[0] / 255.0, controls.color[1] / 255.0, controls.color[2] / 255.0, 1)
     );
     stats.end();
 
