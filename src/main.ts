@@ -11,7 +11,7 @@ import ShaderProgram, { Shader } from './rendering/gl/ShaderProgram';
 
 // Define an object with application parameters and button callbacks
 // This will be referred to by dat.GUI's functions that add GUI elements.
-export const controls = {
+const controls = {
   tesselations: 5,
   'Load Scene': loadScene, // A function pointer, essentially
   color: [252, 126, 126, 1],
@@ -48,8 +48,6 @@ function main() {
   gui.add(controls, 'Load Scene');
   gui.addColor(controls, 'color');
 
-  gui.addColor(controls, 'color');
-
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement>document.getElementById('canvas');
   const gl = <WebGL2RenderingContext>canvas.getContext('webgl2');
@@ -66,7 +64,7 @@ function main() {
   const camera = new Camera(vec3.fromValues(0, 0, 5), vec3.fromValues(0, 0, 0));
 
   const renderer = new OpenGLRenderer(canvas);
-  renderer.setClearColor(0.2, 0.2, 0.2, 1);
+  renderer.setClearColor(0.1, 0.1, 0.1, 1);
   gl.enable(gl.DEPTH_TEST);
 
   const lambert = new ShaderProgram([
@@ -93,13 +91,14 @@ function main() {
     }
     renderer.render(
       camera,
-      lambert,
+      noise,
       [
         // icosphere,
         // square,
         cube,
       ],
-      vec4.fromValues(controls.color[0] / 255.0, controls.color[1] / 255.0, controls.color[2] / 255.0, 1)
+      vec4.fromValues(controls.color[0] / 255.0, controls.color[1] / 255.0, controls.color[2] / 255.0, 1),
+      time
     );
     stats.end();
 

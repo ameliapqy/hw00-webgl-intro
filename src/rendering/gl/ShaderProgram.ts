@@ -29,7 +29,6 @@ class ShaderProgram {
   unifModelInvTr: WebGLUniformLocation;
   unifViewProj: WebGLUniformLocation;
   unifColor: WebGLUniformLocation;
-
   unifTime: WebGLUniformLocation;
 
   constructor(shaders: Array<Shader>) {
