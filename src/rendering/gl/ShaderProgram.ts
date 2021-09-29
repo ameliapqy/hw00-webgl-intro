@@ -1,4 +1,4 @@
-import { vec4, mat4 } from 'gl-matrix';
+import { vec4, mat4, vec3 } from 'gl-matrix';
 import Drawable from './Drawable';
 import { gl } from '../../globals';
 
@@ -30,6 +30,11 @@ class ShaderProgram {
   unifViewProj: WebGLUniformLocation;
   unifColor: WebGLUniformLocation;
   unifTime: WebGLUniformLocation;
+  unifHeight: WebGLUniformLocation;
+  unifShift: WebGLUniformLocation;
+  unifLight: WebGLUniformLocation;
+  unifCameraPos: WebGLUniformLocation;
+  unifShader: WebGLUniformLocation;
 
   constructor(shaders: Array<Shader>) {
     this.prog = gl.createProgram();
@@ -37,6 +42,7 @@ class ShaderProgram {
     for (let shader of shaders) {
       gl.attachShader(this.prog, shader.shader);
     }
+
     gl.linkProgram(this.prog);
     if (!gl.getProgramParameter(this.prog, gl.LINK_STATUS)) {
       throw gl.getProgramInfoLog(this.prog);
@@ -50,6 +56,12 @@ class ShaderProgram {
     this.unifViewProj = gl.getUniformLocation(this.prog, 'u_ViewProj');
     this.unifColor = gl.getUniformLocation(this.prog, 'u_Color');
     this.unifTime = gl.getUniformLocation(this.prog, 'u_Time');
+    this.unifHeight = gl.getUniformLocation(this.prog, 'u_Height');
+    this.unifShift = gl.getUniformLocation(this.prog, 'u_Shift');
+    this.unifLight = gl.getUniformLocation(this.prog, 'u_Light');
+    this.unifCameraPos = gl.getUniformLocation(this.prog, 'u_CameraPos');
+
+    this.unifShader = gl.getUniformLocation(this.prog, 'u_ShadingModel');
   }
 
   use() {
@@ -91,6 +103,41 @@ class ShaderProgram {
     this.use();
     if (this.unifTime !== -1) {
       gl.uniform1i(this.unifTime, time);
+    }
+  }
+
+  setHeight(h: number) {
+    this.use();
+    if (this.unifHeight !== -1) {
+      gl.uniform1i(this.unifHeight, h);
+    }
+  }
+
+  setShift(h: number) {
+    this.use();
+    if (this.unifShift !== -1) {
+      gl.uniform1i(this.unifShift, h);
+    }
+  }
+
+  setLight(h: number) {
+    this.use();
+    if (this.unifLight !== -1) {
+      gl.uniform1i(this.unifLight, h);
+    }
+  }
+
+  setCameraPos(campos: vec3) {
+    this.use();
+    if (this.unifCameraPos !== -1) {
+      gl.uniform3fv(this.unifCameraPos, campos);
+    }
+  }
+
+  setShadingModel(shader: number) {
+    this.use();
+    if (this.unifShader !== -1) {
+      gl.uniform1i(this.unifShader, shader);
     }
   }
 
