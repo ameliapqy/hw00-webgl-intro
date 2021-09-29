@@ -6,7 +6,7 @@ uniform mat4 u_ViewProj;    // We're actually passing the inverse of the viewpro
 
 uniform ivec2 u_Dimensions; // Screen dimensions
 
-uniform vec3 u_Eye; // Camera pos
+uniform vec3 u_CameraPos; // Camera pos
 
 uniform int u_Time;
 in vec4 fs_Pos;
