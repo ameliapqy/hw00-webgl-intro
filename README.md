@@ -5,22 +5,26 @@
 Name: Amelia Peng PennKey: pqy
 
 External resources: https://gist.github.com/patriciogonzalezvivo/670c22f3966e662d2f83 https://learnopengl.com/Lighting/Basic-Lighting
+https://www.iquilezles.org/www/articles/warp/warp.htm
 
 Live demo: https://ameliapqy.github.io/hw00-webgl-intro/
 
-Screenshot: ![planet](planet.png) ![ink-wash](ink.png) ![night-light](night.png)
+Planet: ![planet](planet.png)
+
+Ink-Wash: ![ink-wash](ink.png)
+
+Night-Light: ![night-light](night.png)
 
 Techniques:
 
-- fbm warp for planet texture
-- adding sin waves of time on to the fbm function implementation to make the planet texture shift through time
+- used fbm warping from iq for planet texture
+- added sin waves of time on to the fbm function implementation to make the planet texture shift through time
 - set threshold values and color palette to make planet biomes
-- used ease in, mix, and smoothstep to blend the planet colors with different biomes
-- used bias and gain for the pulsing feature and made planet pulse to become a sphere
-- can choose from lambert, blinn-phong, ambient, and diffuse shading models
-- fun modes:
-- ink wash
-- night
+- utilized ease in, mix, and smoothstep to blend the planet colors with different biomes
+- used bias and gain functions for the pulsing feature and made planet pulse to become a sphere
+- lambert, blinn-phong, ambient, and diffuse shading models
+- developed fun modes with different color palette and noise parameters, which can be selected in gui's mode selection
+- can adjust the planet look by tuning the octaves, height, speed, and more in the gui! 
 
 ## Objective
 
