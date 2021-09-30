@@ -8,7 +8,7 @@ External resources: https://gist.github.com/patriciogonzalezvivo/670c22f3966e662
 
 Live demo: https://ameliapqy.github.io/hw00-webgl-intro/
 
-Screenshot: ![planet](planet.jpg)
+Screenshot: ![planet](planet.png)
 
 Techniques:
 
@@ -17,7 +17,7 @@ Techniques:
 - set threshold values and color palette to make planet biomes
 - used ease in, mix, and smoothstep to blend the planet colors with different biomes
 - used bias and gain for the pulsing feature and made planet pulse to become a sphere
--
+- can choose from lambert, blinn-phong, ambient, and diffuse shading models
 
 ## Objective
 

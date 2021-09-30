@@ -64,21 +64,35 @@ void main()
 
         //ocean - blue
         vec4 oceanCol = mix(diffuseColor, vec4(0.22, 0.3, 0.58,1.0),ease_in_quadratic(fs_noise));
-        float oceanMax = 0.75;
-        //terrain - green
         vec4 terrainCol = vec4(0.35, 0.5, 0.31,1.0);
+        vec4 mountainCol = vec4(0.64, 0.56, 0.43,1.0);
+        vec4 iceCol = vec4(0.96, 0.99,1.0,1.0);
+
+        float oceanMax = 0.75;
         float terrainMax = 0.9;
+        float mountainMax = 1.05;
+
+        if(u_ShadingModel == 5){
+          oceanCol = vec4(0.2,0.2,0.2,1.0);
+          terrainCol = vec4(0.4,0.4,0.4,1.0);
+          mountainCol = vec4(0.6,0.6,0.6,1.0);
+          iceCol = vec4(0.8,0.8,0.8,1.0);
+          oceanMax = 0.6;
+        } else if (u_ShadingModel == 6){
+          oceanCol = vec4(0.13,0.13,0.23,1.0);
+          terrainCol = vec4(0.2,0.27,0.37,1.0); 
+          mountainCol = vec4(0.95,0.9,0.7,1.0);
+          iceCol = vec4(0.12,0.20,0.25,1.0);
+          mountainMax = 0.92;
+        }
         
+        //terrain - green
         float t1 = smoothstep(oceanMax, terrainMax, fs_noise);
         terrainCol = mix(oceanCol, terrainCol,t1);
         //mountain ranges - yellow
-        vec4 mountainCol = vec4(0.64, 0.56, 0.43,1.0);
-        float mountainMax = 1.05;
-
         float t2 = smoothstep(terrainMax, mountainMax, fs_noise);
         mountainCol = mix(terrainCol, mountainCol,t2);
         //ice cap - white
-        vec4 iceCol = vec4(0.96, 0.99,1.0,1.0);
         float t3 = smoothstep(mountainMax, mountainMax+0.1, fs_noise);
         iceCol = mix(mountainCol, iceCol,t3);
 
