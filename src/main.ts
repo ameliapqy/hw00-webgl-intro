@@ -56,7 +56,7 @@ function main() {
   gui.add(controls, 'height', 1, 15).step(1);
   gui.add(controls, 'octaves', 3, 10).step(1);
   gui.add(controls, 'ambient_light', 1, 5).step(0.1);
-  gui.add(controls, 'mode', { lambert: 0, 'blinn-phong': 1, 'ambient-only': 2, 'diffuse-only': 3, pulsing: 4, 'ink-wash': 5, night: 6 });
+  gui.add(controls, 'mode', { lambert: 0, 'blinn-phong': 1, 'ambient-only': 2, 'diffuse-only': 3, pulsing: 4, 'ink-wash': 5, 'night-light': 6 });
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement>document.getElementById('canvas');
@@ -74,7 +74,7 @@ function main() {
   const camera = new Camera(vec3.fromValues(0, 0, 5), vec3.fromValues(0, 0, 0));
 
   const renderer = new OpenGLRenderer(canvas);
-  renderer.setClearColor(0.9, 0.9, 0.9, 1);
+  renderer.setClearColor(0.0, 0.0, 0.0, 1);
   canvas.height;
   canvas.width;
 

@@ -80,9 +80,9 @@ void main()
           oceanMax = 0.6;
         } else if (u_ShadingModel == 6){
           oceanCol = vec4(0.13,0.13,0.23,1.0);
-          terrainCol = vec4(0.2,0.27,0.37,1.0); 
-          mountainCol = vec4(0.95,0.9,0.7,1.0)+sin(time*0.05);
-          iceCol = vec4(0.12,0.20,0.25,1.0);
+          terrainCol = vec4(0.02,0.07,0.07,1.0); 
+          mountainCol = vec4(0.98,0.9,0.7,1.0)+sin(time*0.02);
+          iceCol = vec4(0.05,0.10,0.15,1.0);
           mountainMax = 0.90+0.4*sin(time*0.05);
         }
         

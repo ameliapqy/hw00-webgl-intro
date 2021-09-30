@@ -126,7 +126,7 @@ void main()
     float mult = float(u_Height) * 0.1;
 
     if(u_ShadingModel == 4){
-        threshold = 0.75 + gain(0.75, abs(sin(time*0.005))-0.05);
+        threshold = 0.75 + gain(0.75, abs(sin(time*0.03))-0.05);
     } else if (u_ShadingModel == 5){
         // threshold = 0.9;
         mult *= 0.1;
